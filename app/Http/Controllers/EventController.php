@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
+use App\Events\EventCreated;
+use App\Exports\EventsExport;
+use App\Http\Resources\EventResource;
 use App\Http\Repositories\EventRepository;
 use App\Http\Requests\Events\CreateUpdateEventFormRequest;
-use App\Http\Resources\EventResource;
-use App\Events\EventCreated;
-use App\Models\Event;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class EventController extends Controller
@@ -20,6 +21,23 @@ class EventController extends Controller
     public function __construct(
         protected EventRepository $eventRepository
     ) { }
+
+    public function export()
+    {
+        return (new EventsExport)->forYear(2019)->download('events.xlsx');
+    }
+
+    public function storeExcel()
+    {
+        return (new EventsExport)->forYear(2019)->store('events.xlsx', 's3', null, 'private');
+    }
+
+    public function storePdf()
+    {
+        return (new EventsExport)->forYear(2019)->download('events.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+
+
 
     /**
      * Display a listing of the resource.

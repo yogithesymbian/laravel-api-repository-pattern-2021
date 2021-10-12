@@ -1,0 +1,123 @@
+{
+  // migrations
+  "migration id - yogithesymbian": {
+    "prefix": "migration-id",
+    "body": [
+      "$$table->id();"
+    ],
+    "description": "migration column id - (C) yogithesymbian"
+  },
+  "migration integer - yogithesymbian": {
+    "prefix": "migration-integer",
+    "body": [
+      "$$table->integer('${1:column_name}');"
+    ],
+    "description": "migration column integer - (C) yogithesymbian"
+  },
+  "migration string - yogithesymbian": {
+    "prefix": "migration-string",
+    "body": [
+      "$$table->string('${1:column_name}', ${2:length_optional});"
+    ],
+    "description": "migration column string - (C) yogithesymbian"
+  },
+  "migration string unique- yogithesymbian": {
+    "prefix": "migration-string-unique",
+    "body": [
+      "$$table->string('${1:column_name}', ${2:length_optional})->unique();"
+    ],
+    "description": "migration column string unique - (C) yogithesymbian"
+  },
+  "migration string nullable- yogithesymbian": {
+    "prefix": "migration-string-nullable",
+    "body": [
+      "$$table->string('${1:column_name}', ${2:length_optional})->nullable();"
+    ],
+    "description": "migration column string nullable - (C) yogithesymbian"
+  },
+  "migration text- yogithesymbian": {
+    "prefix": "migration-text",
+    "body": [
+      "$$table->text('${1:column_name}');"
+    ],
+    "description": "migration column text - (C) yogithesymbian"
+  },
+  "migration boolean - yogithesymbian": {
+    "prefix": "migration-boolean",
+    "body": [
+      "$$table->boolean('${1:column_name}');"
+    ],
+    "description": "migration boolean string - (C) yogithesymbian"
+  },
+  "migration index - yogithesymbian": {
+    "prefix": "migration-index",
+    "body": [
+      "$$table->index(['created_at', '${1:column_name}']);"
+    ],
+    "description": "migration index string - (C) yogithesymbian"
+  },
+  "migration foregin key - yogithesymbian": {
+    "prefix": "migration-foreign-key",
+    "body": [
+      "$$table->foreignId('${1:column_name}_id')",
+      "      ->constrained('${1:column_name}s')",
+      "      ->onUpdate('cascade')",
+      "      ->onDelete('restrict');"
+    ],
+    "description": "migration column foregin key - (C) yogithesymbian"
+  },
+  // DEPRECATED
+  // "make column FK on migration": {
+  //   "prefix": "yo-fk-ForeignKey-migration",
+  //   "body": [
+  //     "$$table->unsignedBigInteger('${1:column_fk}_id');",
+  //     "$$table->foreign('${1:column_fk}_id')",
+  //     "      ->references('id')",
+  //     "      ->on('${2:table_target}')",
+  //     "      ->onDelete('cascade');"
+  //   ],
+  //   "description": "make column FK on migration"
+  // },
+  "migration morphs - yogithesymbian": {
+    "prefix": "migration-morphs",
+    "body": [
+      "$$table->morphs('${1:column_name}able');"
+    ],
+    "description": "migration column morphs - (C) yogithesymbian"
+  },
+  "migration softdelete - (C) yogithesymbian": {
+    "prefix": "migration-softdelete",
+    "body": [
+      "$$table->softDeletes();",
+      "$$table->integer('lock_version')->default(0);"
+    ],
+    "description": "migration softdelete - (C) yogithesymbian"
+  },
+  // seeders
+  "seeders-init": {
+    "prefix": "seeders-init",
+    "body": [
+      "DB::table('${1:table}')->delete();",
+      "",
+      "$$timeNow = Carbon::now()->format('Y-m-d H:i:s');",
+      "",
+      "$$datas = [",
+      "    ['id' => 1, 'code' => 'WVFB', 'name' => 'Wedding Venue & F&B',              'created_at' => $$timeNow, 'updated_at' => $$timeNow ],",
+      "];",
+      "foreach($$datas as $$data){",
+      "    ${2:Table}::create($$data);",
+      "}"
+    ],
+    "description": "seeders init - (C) yogithesymbian"
+  },
+
+  "debug return json": {
+    "prefix": "return-json",
+    "body": [
+      "return response()->json([",
+      "  $data",
+      "]);"
+    ],
+    "description": "debug return json"
+  }
+}

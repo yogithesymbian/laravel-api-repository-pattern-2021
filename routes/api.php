@@ -27,6 +27,10 @@ Route::group([
     'prefix' => 'events',
     'as' => 'events.',
 ], function() {
+
+    Route::get('export', [EventController::class, 'export'])->name('export');
+    Route::get('store/excel', [EventController::class, 'storeExcel'])->name('storeExcel');
+    Route::get('store/pdf', [EventController::class, 'storePdf'])->name('storePdf');
     Route::get('', [EventController::class, 'list'])->name('list');
     Route::post('', [EventController::class, 'create'])->name('create');
     Route::get('{event}', [EventController::class, 'show'])->name('show');
